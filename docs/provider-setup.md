@@ -106,9 +106,9 @@ Many systems use `www-data` as user id, so you could do something like
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=../docs/scripts/setupProviderForITest.sh&lines=84-86) -->
 <!-- The below code snippet is automatically added from ../docs/scripts/setupProviderForITest.sh -->
 ```sh
-sudo touch /etc/csaf/config.toml
-sudo chgrp www-data /etc/csaf/config.toml
-sudo chmod g+r,o-rwx /etc/csaf/config.toml
+sudo mkdir /etc/csaf/
+sudo chgrp www-data /etc/csaf/
+sudo chmod g+s,o-rwx /etc/csaf/
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
@@ -123,14 +123,13 @@ see the [options of `csaf_provider`](https://github.com/gocsaf/csaf/blob/main/do
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=../docs/scripts/setupProviderForITest.sh&lines=94-101) -->
 <!-- The below code snippet is automatically added from ../docs/scripts/setupProviderForITest.sh -->
 ```sh
+# Configuration file
+echo '
 # upload_signature = true
 openpgp_private_key = "/etc/csaf/private.asc"
 openpgp_public_key = "/etc/csaf/public.asc"
 #tlps = ["green", "red"]
 canonical_url_prefix = "https://localhost:8443"
-categories = ["Example Company Product A", "expr:document.lang"]
-create_service_document = true
-#no_passphrase = true
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
@@ -174,6 +173,8 @@ To let nginx resolves the DNS record `csaf.data.security.domain.tld` to fulfill 
 
         location = / {
                 try_files /.well-known/csaf/provider-metadata.json =404;
+                # allow others web applications to get the static information
+                add_header Access-Control-Allow-Origin "*";
         }
 
         access_log /var/log/nginx/dns-domain_access.log;

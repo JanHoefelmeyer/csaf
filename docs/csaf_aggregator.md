@@ -184,7 +184,6 @@ categories document. For a more detailed explanation and examples,
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=../docs/examples/aggregator.toml) -->
 <!-- The below code snippet is automatically added from ../docs/examples/aggregator.toml -->
-
 ```toml
 workers = 2
 folder = "/var/csaf_aggregator"
@@ -193,19 +192,17 @@ web = "/var/csaf_aggregator/html"
 domain = "https://localhost:9443"
 rate = 10.0
 insecure = true
+#verbose = false
 #openpgp_private_key =
 #openpgp_public_key =
 #interim_years =
 #passphrase =
 #write_indices = false
 #time_range =
-#client_timeout =
 
 # specification requires at least two providers (default),
 # to override for testing, enable:
 # allow_single_provider = true
-# to use the experimental streaming ROLIE parser, enable:
-# streaming_rolie_parser = true
 
 [aggregator]
   # Set if this instance shall be a mirror (aka `aggregator`) or a `lister`.
@@ -233,7 +230,6 @@ insecure = true
   write_indices = true
   client_cert = "./../devca1/testclient1.crt"
   client_key = "./../devca1/testclient1-key.pem"
-  client_timeout = "30s"
 #  client_passphrase = # Limited and experimental, see downloader doc.
 #  header =
 
@@ -243,12 +239,11 @@ insecure = true
 #  rate = 1.8
 #  insecure = true
   write_indices = true
-  # If aggregator.category == "aggreator", set for an entry that should
+  # If aggregator.category == "aggregator", set for an entry that should
   # be listed in addition:
   category = "lister"
 # ignore_pattern = [".*white.*", ".*red.*"]
 ```
-
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 #### Publish others' advisories
