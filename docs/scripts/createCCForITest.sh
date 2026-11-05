@@ -31,7 +31,7 @@ expiration_days = 50
 
 certtool --generate-certificate --load-privkey testclient1-key.pem --outfile testclient1.crt --load-ca-certificate rootca-cert.pem --load-ca-privkey rootca-key.pem --template gnutls-certtool.testclient1.template --stdout | head -1
 
-certtool --load-ca-certificate rootca-cert.pem --load-certificate testclient1.crt --load-privkey testclient1-key.pem --to-p12 --p12-name "Test Client 1" --null-password --outder --outfile testclient1.p12
+certtool --load-ca-certificate rootca-cert.pem --load-certificate testclient1.crt --load-privkey testclient1-key.pem --to-p12 --p12-name "Test Client 1" --empty-password --outder --outfile testclient1.p12
 
 certtool --generate-privkey --outfile testclient2-key.pem
 
